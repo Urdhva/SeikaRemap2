@@ -5,3 +5,4 @@
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lparam);
 void AddMenus(HWND hwnd);
+void AddControls(HWND hwnd);
