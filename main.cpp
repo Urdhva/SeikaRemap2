@@ -10,7 +10,8 @@
 #define CHANGE_TITLE 4
 
 HMENU hMenu;
-HWND hEdit;
+HWND hEdit, hLogo ;
+HICON hImg, hGenerateImg;
 
 //this is the program entry point 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
@@ -90,6 +91,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     case WM_CREATE:
     {
         DefWindowProc(hwnd, uMsg, wParam, lParam);
+        DisplayImage(hwnd);
         AddControls(hwnd);
         AddMenus(hwnd);
     }
@@ -140,5 +142,14 @@ void AddControls(HWND hwnd)
 
     CreateWindowW(L"Button", L"Change Title", WS_VISIBLE | WS_CHILD,  200, 204, 100, 50, hwnd, (HMENU)CHANGE_TITLE, NULL, NULL);
 
+    hLogo = CreateWindowW(L"Static", NULL, WS_VISIBLE | WS_CHILD | SS_ICON, 350, 60, 100, 100, hwnd, NULL, NULL, NULL);
+    SendMessageW(hLogo, STM_SETIMAGE, IMAGE_ICON, (LPARAM)hImg);
+}
+
+void DisplayImage(HWND hwnd)
+{
+    //we need to take a handle
+    //loading the image into the handler
+    hImg = (HICON)LoadImageW(NULL, L"Ruriko-in4.ico", IMAGE_ICON, 0, 0, LR_LOADFROMFILE);
 
 }
